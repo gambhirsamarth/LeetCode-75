@@ -1,32 +1,24 @@
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Stack;
 
 class Solution {
-    public static String reverseVowels(String s) {
-        char[] charArray = s.toCharArray();
-        Stack<Character> vowelsSet = new Stack<>();
-        Set<Integer> vowelIndexes = new HashSet<>();
+    public String reverseWords(String s) {
+        s = s.trim();
+        String[] wordsArrray = s.split(" ");
+        Stack<String> stack = new Stack<>();
 
-        for (int i = 0; i < charArray.length; i++) {
-            if (charArray[i] == 'a' || charArray[i] == 'e' || charArray[i] == 'i' || charArray[i] == 'o'
-                    || charArray[i] == 'u' ||
-                    charArray[i] == 'A' || charArray[i] == 'E' || charArray[i] == 'I' || charArray[i] == 'O'
-                    || charArray[i] == 'U') {
-                vowelsSet.add(charArray[i]);
-                vowelIndexes.add(i);
+        for (String word : wordsArrray) {
+            if (" ".equals(word) || "".equals(word)) {
+                continue;
+            } else {
+                stack.push(word);
             }
         }
 
-        for (int i : vowelIndexes) {
-            charArray[i] = vowelsSet.pop();
+        StringBuffer sb = new StringBuffer();
+        while (stack != null && !stack.isEmpty() && stack.peek() != null) {
+            sb.append(stack.pop() + " ");
         }
-        return new String(charArray);
-    }
 
-
-    public static void main(String[] args) {
-        String test = "A man, a plan, a canal: Panama";
-        System.out.println(reverseVowels(test));
+        return sb.toString().trim();
     }
 }
